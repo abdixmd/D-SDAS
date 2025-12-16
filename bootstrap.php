@@ -46,4 +46,4 @@ error_reporting(E_ALL);
 // Example: Initialize the Database connection (optional, but good practice)
 // This ensures DB connection attempts happen immediately on page load.
 // Database::getInstance();
-?>
+?> 

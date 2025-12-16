@@ -2,7 +2,7 @@
 <project version="4">
   <component name="MessDetectorOptionsConfiguration">
     <option name="transferred" value="true" />
-  </component>
+  </component> 
   <component name="PHPCSFixerOptionsConfiguration">
     <option name="transferred" value="true" />
   </component>

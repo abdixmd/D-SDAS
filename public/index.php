@@ -10,7 +10,7 @@ if (Auth::isLoggedIn()) {
     $target = ($_SESSION['user_role'] === 'admin') ? 'admin.php' : 'dashboard.php';
     header("Location: $target");
     exit;
-}
+} 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');

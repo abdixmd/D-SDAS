@@ -120,7 +120,7 @@ $summary = [
                                         <?php endif; ?>
                                         <?php if ($r['status'] === 'sealed'): ?>
                                             <form method="POST" style="display:inline;"
-                                                onsubmit="return confirm('FINAL ALLOCATION. Are you sure?');">
+                                                onsubmit="return confirm('FINAL ALLOCATION. Are you sure?');"> 
                                                 <input type="hidden" name="action" value="finalize">
                                                 <input type="hidden" name="round_id" value="<?php echo $r['round_id']; ?>">
                                                 <button type="submit" class="ms-btn primary">Finalize Allocations</button>
