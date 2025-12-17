@@ -28,7 +28,7 @@ CORE ENGINE LOGIC
 TECHNOLOGY STACK
 ----------------
 - Backend:    OOP PHP 7.4+ (Classes: Auth, Database, Engine, Admin)
-- Database:   PostgreSQL (Connection on 'localhost:5432' / 'postgres' DB)
+- Database:   MySQL/MariaDB (Connection on 'localhost:3306' / 'dsdas_erp' DB)
 - Frontend:   HTML, CSS (Microsoft Style), JavaScript (AJAX for live prediction)
 
 DIRECTORY STRUCTURE
@@ -63,8 +63,8 @@ INITIAL SETUP GUIDE
 -------------------
 
 1. DATABASE: 
-   - Ensure PostgreSQL is running on port 5432.
-   - Run the `dsdas_core.sql` script on the `postgres` database.
+   - Ensure MySQL is running on port 3306.
+   - Run the `dsdas_core.sql` script on the `dsdas_erp` database.
 
 2. CREDENTIALS:
    - The database credentials are hardcoded in `src/Config.php`.
