@@ -143,7 +143,7 @@ INSERT INTO users (username, email, password_hash, role, admission_rank) VALUES
 INSERT INTO admission_rounds (round_name, start_time, end_time, status) VALUES
 ('Academic Round 2025-A', NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY), 'active');
 
-/*<?php
+<?php
 // src/Database.php
 class Database {
     private static $instance = null;
@@ -183,4 +183,3 @@ class Database {
     public function getConnection() {
         return $this->pdo;
     }
-}*/
