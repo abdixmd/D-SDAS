@@ -5,19 +5,12 @@ require_once 'Database.php';
 class Auth {
     private static $db = null;
 
-    /**
-     * Ensures the database connection is initialized.
-     */
     private static function initDb() {
         if (self::$db === null) {
             self::$db = Database::getInstance()->getConnection();
         }
     }
 
-    /**
-     * Attempts to log in a user.
-     * @return bool True on success, false otherwise.
-     */
     public static function login($username, $password) {
         self::initDb();
 
@@ -25,17 +18,18 @@ class Auth {
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user['password_hash'])) {
-            // Success: Set session variables
+        // PLAIN TEXT CHECK: Direct comparison instead of password_verify
+        if ($user && $password === $user['password_hash']) {
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['user_role'] = $user['role'];
             $_SESSION['username'] = $username;
-            $_SESSION['rank'] = $user['admission_rank']; // Crucial for the prediction engine
+            $_SESSION['rank'] = $user['admission_rank'];
 
             return true;
         }
         return false;
     }
+
 
     /**
      * Logs the current user out.

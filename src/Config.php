@@ -7,7 +7,7 @@
 // =========================================================
 
 // Define the root directory name for URL paths (if needed)
-define('APP_NAME', 'DSDAS_Project');
+//define('APP_NAME', 'DSDAS_Project');
 
 // =========================================================
 // DATABASE CONNECTION SETTINGS (PostgreSQL)
@@ -17,13 +17,13 @@ define('APP_NAME', 'DSDAS_Project');
 define('DB_HOST', 'localhost');
 
 // Database Name (from dsdas_core.sql setup)
-define('DB_NAME', 'postgres');
+define('DB_NAME', 'dsdas_erp');
 
 // Database User
-define('DB_USER', 'postgresql');
+define('DB_USER', 'root');
 
 // Database Password
-define('DB_PASS', '123');
+define('DB_PASS', '');
 
 // Allocation Cooldown Time (in minutes)
 define('ALLOCATION_COOLDOWN_MINUTES', 30);

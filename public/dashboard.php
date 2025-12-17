@@ -24,33 +24,21 @@ $rank = $_SESSION['rank'] ?? 1240; // Example Rank
     <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css">
 </head>
 <body>
-
-    <header class="ms-header">
+    <header class="ms-header" style="background-color: #004578;">
         <div class="header-left">
-            <div class="waffle-menu"><i class="ms-Icon ms-Icon--WaffleOffice365"></i></div>
-            <span class="brand-name">University 365</span>
+            <span class="ms-icon">⠿</span>
+            <span class="app-title">D-SDAS Student Center</span>
         </div>
-        <div class="header-center">
-            <div class="search-bar">
-                <i class="ms-Icon ms-Icon--Search"></i>
-                <input type="text" placeholder="Search departments...">
-            </div>
-        </div>
-        <div class="header-right">
-            <div class="user-profile">
-                <span><?php echo $user; ?></span>
-                <div class="avatar-circle">JS</div>
-            </div>
+        <div class="header-right" style="display:flex; align-items:center; gap:15px;">
+            <span class="user-greeting">Welcome back, <strong>Student</strong></span>
+            <div class="user-profile-circle" style="background:#002d50;">A</div>
+            <a href="logout.php" class="ms-logout-btn">Sign out</a>
         </div>
     </header>
-
     <div class="layout-container">
         <aside class="ms-sidebar">
             <nav>
                 <a href="#" class="nav-item active"><i class="ms-Icon ms-Icon--GridView"></i> Dashboard</a>
-                <a href="#" class="nav-item"><i class="ms-Icon ms-Icon--Education"></i> Academics</a>
-                <a href="#" class="nav-item"><i class="ms-Icon ms-Icon--Money"></i> Finances</a>
-                <a href="#" class="nav-item"><i class="ms-Icon ms-Icon--Settings"></i> Settings</a>
             </nav>
         </aside>
 
@@ -78,6 +66,13 @@ $rank = $_SESSION['rank'] ?? 1240; // Example Rank
                                     <option value="1">Computer Science (CS)</option>
                                     <option value="2">Electrical Engineering (EE)</option>
                                     <option value="3">Mechanical Engineering (ME)</option>
+                                    <option value="4">Software Engineering (SWE)</option>
+                                    <option value="5">Civil Engineering (CE)</option>
+                                    <option value="6">Data Science (DS)</option>
+                                    <option value="7">Cyber Security (CyS)</option>
+                                    <option value="8">Architecture (Arch)</option>
+                                    <option value="9">Business Information Systems (BIS)</option>
+                                    <option value="10">Information Technology (IT)</option>
                                 </select>
                             </div>
 
@@ -137,3 +132,8 @@ $rank = $_SESSION['rank'] ?? 1240; // Example Rank
     <script src="assets/js/app.js"></script>
 </body>
 </html>
+
+
+
+
+,
