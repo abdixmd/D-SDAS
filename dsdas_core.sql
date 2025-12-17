@@ -14,7 +14,7 @@ CREATE TABLE users (
     -- THE CRITICAL METRIC
     admission_rank INT, -- Example: Rank #450
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+); 
 
 -- 2. DEPARTMENTS (The Options)
 CREATE TABLE departments (

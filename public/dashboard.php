@@ -108,7 +108,7 @@ $rank = $_SESSION['rank'] ?? 1240; // Example Rank
                         <div class="stat-item">
                             <span class="label">Admission Rank</span>
                             <span class="value text-blue">#<?php echo $rank; ?></span>
-                        </div>
+                        </div> 
                         <div class="stat-item">
                             <span class="label">Current Status</span>
                             <span class="value">Pending Allocation</span>
