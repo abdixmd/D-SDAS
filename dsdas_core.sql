@@ -1,12 +1,6 @@
 SET FOREIGN_KEY_CHECKS = 0; -- Disable checks to allow dropping/creating tables cleanly
 
-
-
-
-
-
-
-
+-- 1. USERS (Just Identity & Rank)
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -20,7 +14,7 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ); 
 
-
+-- 2. DEPARTMENTS (The Options)
 DROP TABLE IF EXISTS departments;
 CREATE TABLE departments (
     dept_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -29,6 +23,7 @@ CREATE TABLE departments (
     current_locked INT DEFAULT 0 -- Live counter for speed
 );
 
+-- 3. ADMISSION ROUNDS (The Time Windows)
 DROP TABLE IF EXISTS admission_rounds;
 CREATE TABLE admission_rounds (
     round_id INT AUTO_INCREMENT PRIMARY KEY,
