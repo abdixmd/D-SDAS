@@ -9,17 +9,16 @@ class Admin {
         $this->db = Database::getInstance()->getConnection();
     }
 
-    /**
-     * Retrieves all admission rounds for the Admin dashboard.
-     */
+   // Retrieves all admission rounds for the Admin dashboard.
+   
     public function getAllRounds() {
         $stmt = $this->db->query("SELECT * FROM admission_rounds ORDER BY start_time DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Creates a new admission round.
-     */
+
+    // Creates a new admission round.
+ 
     public function createRound($name, $start, $end) {
         $sql = "INSERT INTO admission_rounds (round_name, start_time, end_time) 
                 VALUES (?, ?, ?)";
@@ -27,19 +26,19 @@ class Admin {
         return $stmt->execute([$name, $start, $end]);
     }
 
-    /**
-     * Changes the status of an admission round (e.g., scheduled -> active).
-     */
+
+    // Changes the status of an admission round (e.g., scheduled -> active).
+
     public function updateRoundStatus($roundId, $status) {
         $sql = "UPDATE admission_rounds SET status = ? WHERE round_id = ?";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$status, $roundId]);
     }
 
-    /**
-     * Finalizes the allocations for a SEALED round.
-     * This is the CORE ALLOCATION STEP: sets is_finalized=TRUE.
-     */
+
+    // Finalizes the allocations for a SEALED round.
+    // This is the CORE ALLOCATION STEP: sets is_finalized=TRUE.
+
     public function finalizeAllocations($roundId) {
         // 1. Mark all allocations for this round as FINALIZED
         $sql = "UPDATE allocations 
@@ -56,9 +55,9 @@ class Admin {
         return ['success' => false, 'msg' => 'Failed to finalize allocations.'];
     }
 
-    /**
-     * Gets a summary of current allocation stats by department.
-     */
+
+    //Gets a summary of current allocation stats by department.
+
     public function getAllocationSummary() {
         $sql = "SELECT d.dept_name, d.base_capacity, d.current_locked,
                        p.historical_cutoff_rank
