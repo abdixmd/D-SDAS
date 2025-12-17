@@ -16,6 +16,7 @@ $rank = $_SESSION['rank'] ?? 1240; // Example Rank
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +24,7 @@ $rank = $_SESSION['rank'] ?? 1240; // Example Rank
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css">
 </head>
+
 <body>
     <header class="ms-header" style="background-color: #004578;">
         <div class="header-left">
@@ -43,14 +45,20 @@ $rank = $_SESSION['rank'] ?? 1240; // Example Rank
         </aside>
 
         <main class="ms-content">
-            
-            <div class="welcome-section">
-                <h1>Dashboard</h1>
-                <p>Manage your department allocation and academic status.</p>
+
+        
+            <div class="welcome-section" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Manage your department allocation and academic status.</p>
+                </div>
+                <button onclick="window.print()" class="ms-btn" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; cursor: pointer; background: #ffffff; border: 1px solid #004578; color: #004578; border-radius: 2px; font-weight: 600;">
+                    <i class="ms-Icon ms-Icon--Print"></i> Print Application Summary
+                </button>
             </div>
 
             <div class="tile-grid">
-                
+
                 <div class="tile large-tile">
                     <div class="tile-header">
                         <h3><i class="ms-Icon ms-Icon--WaitList"></i> Allocation Round 1</h3>
@@ -58,7 +66,7 @@ $rank = $_SESSION['rank'] ?? 1240; // Example Rank
                     </div>
                     <div class="tile-body">
                         <div class="allocation-controls">
-                            
+
                             <div class="control-group">
                                 <label>Select Department Priority</label>
                                 <select id="deptSelect" class="ms-select">
@@ -98,12 +106,14 @@ $rank = $_SESSION['rank'] ?? 1240; // Example Rank
                 </div>
 
                 <div class="tile">
-                    <div class="tile-header"><h3>My Profile</h3></div>
+                    <div class="tile-header">
+                        <h3>My Profile</h3>
+                    </div>
                     <div class="tile-body stat-body">
                         <div class="stat-item">
                             <span class="label">Admission Rank</span>
                             <span class="value text-blue">#<?php echo $rank; ?></span>
-                        </div> 
+                        </div>
                         <div class="stat-item">
                             <span class="label">Current Status</span>
                             <span class="value">Pending Allocation</span>
@@ -112,7 +122,9 @@ $rank = $_SESSION['rank'] ?? 1240; // Example Rank
                 </div>
 
                 <div class="tile">
-                    <div class="tile-header"><h3>Notifications</h3></div>
+                    <div class="tile-header">
+                        <h3>Notifications</h3>
+                    </div>
                     <div class="tile-body list-body">
                         <div class="list-item">
                             <i class="ms-Icon ms-Icon--Info"></i>
@@ -131,9 +143,5 @@ $rank = $_SESSION['rank'] ?? 1240; // Example Rank
 
     <script src="assets/js/app.js"></script>
 </body>
+
 </html>
-
-
-
-
-,
