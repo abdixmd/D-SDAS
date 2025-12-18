@@ -22,12 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $stmt = $db->prepare("INSERT INTO admission_rounds (round_name, start_time, end_time, status) VALUES (?, ?, ?, 'scheduled')");
             $stmt->execute([$_POST['name'], $_POST['start'], $_POST['end']]);
             $message = ['type' => 'success', 'text' => 'Round scheduled successfully.'];
-            
         } elseif ($_POST['action'] === 'update_status') {
             $stmt = $db->prepare("UPDATE admission_rounds SET status = ? WHERE round_id = ?");
             $stmt->execute([$_POST['status'], $_POST['round_id']]);
             $message = ['type' => 'success', 'text' => 'Round status updated to ' . ucfirst($_POST['status']) . '.'];
-            
         } elseif ($_POST['action'] === 'finalize') {
             // Mark all allocations in this round as finalized
             $stmt = $db->prepare("UPDATE allocations SET is_finalized = TRUE WHERE round_id = ?");
@@ -54,12 +52,14 @@ $summary = $db->query($summary_query)->fetchAll();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Control | D-SDAS</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body class="ms-office-theme">
 
     <header class="ms-header" style="background-color: #004578;">
@@ -84,8 +84,11 @@ $summary = $db->query($summary_query)->fetchAll();
         </aside>
 
         <main class="ms-content" style="padding: 20px; flex: 1;">
-            <section class="content-header">
+            <section class="content-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h1>Allocation System Management</h1>
+                <button onclick="window.print()" style="padding: 8px 16px; cursor: pointer; background: #f3f2f1; border: 1px solid #8a8886; border-radius: 2px; display: flex; align-items: center; gap: 8px;">
+                    <span>🖨️</span> Print Page Report
+                </button>
             </section>
 
             <?php if (!empty($message)): ?>
@@ -95,7 +98,7 @@ $summary = $db->query($summary_query)->fetchAll();
             <?php endif; ?>
 
             <div class="tile-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
-                
+
                 <div class="tile large-tile">
                     <div class="tile-header">
                         <h3>Round Lifecycle Control</h3>
@@ -119,37 +122,31 @@ $summary = $db->query($summary_query)->fetchAll();
                             </thead>
                             <tbody>
                                 <?php foreach ($rounds as $r): ?>
-                                <tr style="border-bottom: 1px solid #eee;">
-                                    <td><strong><?php echo htmlspecialchars($r['round_name']); ?></strong></td>
-                                    <td>
-                                        <span class="badge badge-<?php echo $r['status']; ?>">
-                                            <?php echo ucfirst($r['status']); ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <?php if ($r['status'] === 'scheduled'): ?>
-                                            <form method="POST" style="display:inline;">
-                                                <input type="hidden" name="action" value="update_status">
-                                                <input type="hidden" name="round_id" value="<?php echo $r['round_id']; ?>">
-                                                <input type="hidden" name="status" value="active">
-                                                <button type="submit" class="ms-secondary-btn">Activate</button>
-                                            </form>
-                                        <?php elseif ($r['status'] === 'active'): ?>
-                                            <form method="POST" style="display:inline;">
-                                                <input type="hidden" name="action" value="update_status">
-                                                <input type="hidden" name="round_id" value="<?php echo $r['round_id']; ?>">
-                                                <input type="hidden" name="status" value="sealed">
-                                                <button type="submit" class="ms-secondary-btn">Seal Round</button>
-                                            </form>
-                                        <?php elseif ($r['status'] === 'sealed'): ?>
-                                            <form method="POST" style="display:inline;">
-                                                <input type="hidden" name="action" value="finalize">
-                                                <input type="hidden" name="round_id" value="<?php echo $r['round_id']; ?>">
-                                                <button type="submit" class="ms-primary-btn">Finalize Allocations</button>
-                                            </form>
-                                        <?php endif; ?>
-                                    </td>
-                                </tr>
+                                    <tr style="border-bottom: 1px solid #eee;">
+                                        <td><strong><?php echo htmlspecialchars($r['round_name']); ?></strong></td>
+                                        <td>
+                                            <span class="badge badge-<?php echo $r['status']; ?>">
+                                                <?php echo ucfirst($r['status']); ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <?php if ($r['status'] === 'scheduled'): ?>
+                                                <form method="POST" style="display:inline;">
+                                                    <input type="hidden" name="action" value="update_status">
+                                                    <input type="hidden" name="round_id" value="<?php echo $r['round_id']; ?>">
+                                                    <input type="hidden" name="status" value="active">
+                                                    <button type="submit" class="ms-secondary-btn">Activate</button>
+                                                </form>
+                                            <?php elseif ($r['status'] === 'active'): ?>
+                                                <form method="POST" style="display:inline;">
+                                                    <input type="hidden" name="action" value="update_status">
+                                                    <input type="hidden" name="round_id" value="<?php echo $r['round_id']; ?>">
+                                                    <input type="hidden" name="status" value="sealed">
+                                                    <button type="submit" class="ms-secondary-btn">Seal Round</button>
+                                                </form>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -185,43 +182,9 @@ $summary = $db->query($summary_query)->fetchAll();
                     </div>
                 </div>
 
-            </div> 
-
-            <!-- Finalized Allocations Summary -->
-            <div class="tile" style="margin-top: 20px;">
-                <div class="tile-header">
-                    <h3>Finalized Allocations Summary</h3>
-                </div>
-                <div class="tile-body">
-                    <?php
-                    $final_summary = $db->query("
-                        SELECT d.dept_name, COUNT(a.student_id) AS allocated_students
-                        FROM allocations a
-                        JOIN departments d ON a.dept_id = d.dept_id
-                        WHERE a.is_finalized = TRUE
-                        GROUP BY d.dept_id
-                    ")->fetchAll();
-                    ?>
-                    <table class="ms-table" style="width: 100%;">
-                        <thead>
-                            <tr style="text-align: left; border-bottom: 1px solid #eee;">
-                                <th>Dept</th>
-                                <th>Allocated Students</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($final_summary as $f): ?>
-                            <tr>
-                                <td><?php echo $f['dept_name']; ?></td>
-                                <td><?php echo $f['allocated_students']; ?></td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
             </div>
-
         </main>
     </div>
 </body>
+
 </html>
